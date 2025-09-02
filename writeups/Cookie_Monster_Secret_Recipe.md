@@ -1,49 +1,46 @@
-# DuckWare Team - You either know, XOR you don't (CryptoHack)
-###### Solved by @vin1sss
+# picoCTF - Cookie Monster Secret Recipe
+###### Solved by @Gunogueiramg
 
-> This is a CTF about Cryptography
-
-## Desafio: You either know, XOR you don't (Criptografia)
+## Desafio: Cookie Monster Secret Recipe
 #### Introdução
 
-Este é o último desafio da trilha de aprendizado ["Introduction to CryptoHack"](https://cryptohack.org/courses/intro/) da plataforma [CryptoHack](https://cryptohack.org/). A trilha é composta por uma série de 10 exercícios introdutórios voltados ao estudo da [criptografia](https://pt.wikipedia.org/wiki/Criptografia) e ao funcionamento da própria plataforma. Seu principal objetivo é proporcionar uma base sólida nos conceitos fundamentais da criptografia moderna, por meio da prática com desafios progressivos e acessíveis para iniciantes.
+Este é um desafio da plataforma [picoCTF](https://picoctf.org/). Classificado como nível fácil, ele é ideal para iniciantes no mundo de CTF's, assim como . Esse exercício, incentiva o desafiante em utilizar a [ferramenta de desenvolvedor](https://developer.mozilla.org/pt-BR/docs/Learn_web_development/Howto/Tools_and_setup/What_are_browser_developer_tools) do navegador para capturar a flag e assim concluir a tarefa. O desafio explora conceitos de [cookies de navegador](https://pingback.com/br/resources/o-que-sao-cookies/) e  com isso, há um trocadilho com uma história de um monstro que guarda uma receita secreta de um cookie que também pode ser traduzido como biscoito para português.
 
-- [Página do desafio](https://cryptohack.org/courses/intro/xorkey1/)
+#### Print do desafio
+![Print do desafio](https://i.imgur.com/uLX2Qft.png)
 
-Esta questão consiste em decriptar uma string em [hexadecimal](https://pt.wikipedia.org/wiki/Sistema_de_numera%C3%A7%C3%A3o_hexadecimal) para encontrar a flag.
+## Description
 
-#### Análise Inicial
+> *"Cookie Monster has hidden his top-secret cookie recipe somewhere on his website. As an aspiring cookie detective, your mission is to uncover this delectable secret. Can you outsmart Cookie Monster and find the hidden recipe? Additional details will be available after launching your challenge instance."*
+> *(O Monstro dos biscoito escondeu sua receita secreta de biscoito em algum lugar de seu website. Como um aspirante a detetive de biscoito, sua missão é desvendar este delicioso segredo. Você consegue ser mais esperto que o Monstro dos biscoitos e encontrar a receita escondida? Detalhes adicionais estarão disponíveis após o lançamento da sua instância do desafio.)*
 
-Após ensinar o funcionamento do [algoritmo XOR](https://www.101computing.net/xor-encryption-algorithm/) nos desafios anteriores, agora é apresentado algo um pouco mais desafiante. O enunciado é simples, contendo apenas a frase:
+#### Além da descrição, há três dicas
+## Dicas (Hints)
 
-> *"I've encrypted the flag with my secret key, you'll never be able to guess it."*  
-> *(Eu criptografei a bandeira com minha chave secreta, você nunca será capaz de adivinhá-la.)*
+**Dica 1**
+> *"Sometimes, the most important information is hidden in plain sight. Have you checked all parts of the webpage?"*
+> *(Às vezes, a informação mais importante está escondida à vista de todos. Você já verificou todas as partes da página?)*
 
-Além disso, há uma dica:
+---
 
-> *"Remember the flag format and how it might help you in this challenge!"*  
-> *(Lembre-se do formato da bandeira e como ele pode ajudar você neste desafio!)*
+**Dica 2**
+> *"Cookies aren't just for eating - they're also used in web technologies!"*
+> *(Cookies não são apenas para comer - eles também são usados em tecnologias web!)*
 
-E também uma string em hexadecimal:
+---
 
-0e0b213f26041e480b26217f27342e175d0e070a3c5b103e2526217f27342e175d0e077e263451150104
-
-Print do enunciado:
-[![Captura-de-tela-2025-06-13-134751.png](https://i.postimg.cc/P5b2Kb0Z/Captura-de-tela-2025-06-13-134751.png)](https://postimg.cc/bZJxwnyN)
+**Dica 3**
+> *"Web browsers often have tools that can help you inspect various aspects of a webpage, including things you can't see directly."*
+> *(Navegadores web frequentemente possuem ferramentas que podem te ajudar a inspecionar vários aspectos de uma página, incluindo coisas que você não consegue ver diretamente.)*
 
 #### Interpretando a dica
 
-A dica fornecida no enunciado nos direciona a uma única abordagem lógica. Sabemos que o algoritmo XOR opera sobre dois conjuntos de dados:
-
-[![xor-xor.webp](https://i.postimg.cc/yNDhtwNM/xor-xor.webp)](https://postimg.cc/4KThh2VP)
-
-Neste caso, uma das entradas é a string em hexadecimal apresentada no desafio. Assim, resta deduzirmos a segunda entrada, que deve ser algo que já conhecemos.
-
-Como aprendemos ao longo da trilha, todas as flags seguem um formato padronizado e começam com `"crypto{"`. Podemos, portanto, usar esse trecho conhecido da flag como ponto de partida para tentar descobrir qual foi a chave secreta utilizada na cifra.
-
 #### Solução
+Ao iniciar a instância do desafio, é aberto uma página web inicial do "Cookie Monster's Secret Recipe" exigindo um usuário e senha para o login.
 
-Para resolver este desafio, utilizarei o site [dcode.fr](https://www.dcode.fr/xor-cipher), que contém uma ferramenta prática para realizar operações de [XOR](https://www.101computing.net/xor-encryption-algorithm/) entre textos e/ou valores hexadecimais. Essa ferramenta facilita a aplicação do algoritmo e nos permite testar hipóteses sobre a chave ao comparar os resultados com o formato esperado da flag.
+![print do site](https://i.imgur.com/KkvLBM7.png)
+
+
 
 Então, inserindo a string em hexadecimal fornecida no enunciado diretamente na caixa de texto principal (que aceita entradas em hexadecimal, sem a necessidade de conversão prévia), e o trecho conhecido da flag `"crypto{"` na caixa de texto da opção marcada **"Use the ascii key"** (que permite entradas em texto padrão), realizamos a primeira análise:
 
