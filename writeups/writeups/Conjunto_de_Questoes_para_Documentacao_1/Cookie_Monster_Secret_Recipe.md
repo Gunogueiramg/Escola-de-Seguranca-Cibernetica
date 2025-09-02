@@ -4,7 +4,7 @@
 ## Desafio: Cookie Monster Secret Recipe
 #### Introdução
 
-Este é um desafio da plataforma [picoCTF](https://picoctf.org/). Classificado como nível fácil, ele é ideal para iniciantes no mundo de CTF's, assim como . Esse exercício, incentiva o desafiante em utilizar a [ferramenta de desenvolvedor](https://developer.mozilla.org/pt-BR/docs/Learn_web_development/Howto/Tools_and_setup/What_are_browser_developer_tools) do navegador para capturar a flag e assim concluir a tarefa. O desafio explora conceitos de [cookies de navegador](https://pingback.com/br/resources/o-que-sao-cookies/) e  com isso, há um trocadilho com uma história de um monstro que guarda uma receita secreta de um cookie que também pode ser traduzido como biscoito para português.
+Este é um desafio da plataforma [picoCTF](https://picoctf.org/). Classificado como nível fácil, ele é de simples resolução para iniciantes no mundo de CTF's. Esse exercício, incentiva o desafiante em utilizar a [ferramenta de desenvolvedor](https://developer.mozilla.org/pt-BR/docs/Learn_web_development/Howto/Tools_and_setup/What_are_browser_developer_tools) do navegador para capturar a flag e assim concluir a tarefa. O desafio explora conceitos de [cookies de navegador](https://pingback.com/br/resources/o-que-sao-cookies/) e  com isso, há um trocadilho com uma história de um monstro que guarda uma receita secreta de um **cookie** que também pode ser traduzido como **biscoito** para o português.
 
 #### Print do desafio
 ![Print do desafio](https://i.imgur.com/uLX2Qft.png)
@@ -33,36 +33,35 @@ Este é um desafio da plataforma [picoCTF](https://picoctf.org/). Classificado c
 > *"Web browsers often have tools that can help you inspect various aspects of a webpage, including things you can't see directly."*
 > *(Navegadores web frequentemente possuem ferramentas que podem te ajudar a inspecionar vários aspectos de uma página, incluindo coisas que você não consegue ver diretamente.)*
 
-#### Interpretando a dica
+#### Interpretando as dicas
+As dicas fornecidas conduzem o desafiante em explorar os cookies utilizados no site, através da ferramenta de desenvolvedor no navegador para capturar a flag. 
 
 #### Solução
 Ao iniciar a instância do desafio, é aberto uma página web inicial do "Cookie Monster's Secret Recipe" exigindo um usuário e senha para o login.
 
 ![print do site](https://i.imgur.com/KkvLBM7.png)
 
+Ao inserir qualquer nome de usuário e senha nos campos e clicar em login, aparece a seguinte mensagem:
+> **Acesso Negado (Access Denied)**
+>
+> *"Cookie Monster says: 'Me no need password. Me just need cookies!'"*
+> *(O Monstro das Bolachas diz: 'Eu não preciso de senha. Eu só preciso de cookies!')*
+>
+> *"Hint: Have you checked your cookies lately?"*
+> *(Dica: Você verificou seus cookies ultimamente?)*
+> 
+Seguindo as dicas para encontrar o cookie, é necessário abri a interface de desenvolvimento com o comando: **Ctrl + Shift + I** e selecionar a aba "Application". No campo de "storage", aparecerá o elemento cookies, como mostra o seguint print:
+![print do cookie](https://i.imgur.com/MpzUkre.png)
 
+No campo "Value" dentro do cookies, é possível encontrar a seguinte mensagem encriptada: `"cGljb0NURntjMDBrMWVfbTBuc3Rlcl9sMHZlc19jMDBraWVzX0E2RkEwN0Q4fQ%3D%3D"`. Através da plataforma [CyberChef](https://gchq.github.io/CyberChef/), partindo o encondig [base64](https://www.redhat.com/en/blog/base64-encoding), ao colocar a sequência encriptada no Input da ferramenta, no Output, podemos ver em texto claro, a flag que estamos procurando:
+![print da flag](https://i.imgur.com/pLZrvgz.png)
 
-Então, inserindo a string em hexadecimal fornecida no enunciado diretamente na caixa de texto principal (que aceita entradas em hexadecimal, sem a necessidade de conversão prévia), e o trecho conhecido da flag `"crypto{"` na caixa de texto da opção marcada **"Use the ascii key"** (que permite entradas em texto padrão), realizamos a primeira análise:
-
-[![Captura-de-tela-2025-06-13-141610.png](https://i.postimg.cc/6q2y50Cm/Captura-de-tela-2025-06-13-141610.png)](https://postimg.cc/YL7pdQn6)
-
-A ferramenta aplicará o XOR entre os primeiros bytes da string e a palavra `"crypto{"`, revelando a parte inicial da chave secreta utilizada na criptografia:
-
-[![Captura-de-tela-2025-06-13-142408.png](https://i.postimg.cc/xdpHPgy6/Captura-de-tela-2025-06-13-142408.png)](https://postimg.cc/QB5H8Qz7)
-
-Agora que sabemos o começo da chave secreta, `"myXORkey"`, utilizamos essa informação para realizar uma nova operação de XOR. Desta vez, em vez de usar o trecho conhecido da flag, aplicamos diretamente a chave descoberta sobre toda a string em hexadecimal.
-
-[![Captura-de-tela-2025-06-13-143321.png](https://i.postimg.cc/RhSBV12z/Captura-de-tela-2025-06-13-143321.png)](https://postimg.cc/dkxX5CqW)
-
-A própria ferramenta do dcode se encarrega de repetir automaticamente a chave ao longo de toda a entrada — o que é essencial, já que a chave tem apenas 8 bytes, enquanto a string criptografada possui dezenas de bytes. Com isso, conseguimos aplicar corretamente a operação de XOR byte a byte, o que revela o conteúdo original criptografado: a flag completa.
-
-[![Captura-de-tela-2025-06-13-143409.png](https://i.postimg.cc/Sx2psx1j/Captura-de-tela-2025-06-13-143409.png)](https://postimg.cc/21Dt9rDf)
 
 #### Conclusão
 
 Flag:
->`crypto{1f_y0u_Kn0w_En0uGH_y0u_Kn0w_1t_4ll}`
+>`picoCTF{c00k1e_m0nster_l0ves_c00kies_A6FA07D8}`
+>
+>Esse foi um excelente desafio introdutório de CTF, uma vez que, explora conceitos de cookies de sessão de navegador e ao mesmo tempo exige que o desafiante descubra qual enconding foi utilizado para codificar a mensagem encontrada. Até encontrar a flag, foi explorados diversos conceitos que certamente serão fundamentais para a resolução de novos desafios.
 
-Este desafio foi uma excelente aplicação prática dos conceitos fundamentais de criptografia com XOR. Através de um pequeno trecho conhecido da flag, conseguimos deduzir parte da chave secreta utilizada na cifra. A partir disso, utilizamos uma ferramenta online para repetir essa chave ao longo de toda a mensagem criptografada, revertendo o processo de encriptação e revelando a flag completa.
 
-Mais do que simplesmente encontrar a resposta, este exercício reforça a importância de padrões previsíveis em contextos criptográficos. Quando uma parte da mensagem é conhecida — ou pode ser adivinhada —, todo o sistema se torna vulnerável. Essa lição é essencial não só para resolver desafios em CTFs, mas também para compreender os riscos reais em sistemas mal projetados no mundo da segurança da informação.
