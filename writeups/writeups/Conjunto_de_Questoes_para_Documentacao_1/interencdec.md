@@ -1,65 +1,41 @@
-# picoCTF - Cookie Monster Secret Recipe
+# picoCTF - Interencdec
 ###### Solved by @Gunogueiramg
 
-## Desafio: Cookie Monster Secret Recipe
+## Desafio:Interencdec
 #### Introdução
 
-Este é um desafio da plataforma [picoCTF](https://picoctf.org/). Classificado como nível fácil, ele é de simples resolução para iniciantes no mundo de CTF's. Esse exercício, incentiva o desafiante em utilizar a [ferramenta de desenvolvedor](https://developer.mozilla.org/pt-BR/docs/Learn_web_development/Howto/Tools_and_setup/What_are_browser_developer_tools) do navegador para capturar a flag e assim concluir a tarefa. O desafio explora conceitos de [cookies de navegador](https://pingback.com/br/resources/o-que-sao-cookies/) e  com isso, há um trocadilho com uma história de um monstro que guarda uma receita secreta de um **cookie** que também pode ser traduzido como **biscoito** para o português.
-
+Este desafio da plataforma [picoCTF](https://picoctf.org/) é classificado como fácil e ele fornece ao desafiante um arquivo com uma mensagem codificada e propõe a descoberta da flag através de mais de um processo de codificação. Em seu enunciado, com as tags do exercício, temos pistas que confirmam o foco do exercício: `Cryptography` e também quais tipos de codificação serão necessários para concluir o desafio: `base64` e `caesar`   
 #### Print do desafio
-![Print do desafio](https://i.imgur.com/uLX2Qft.png)
+![Print do desafio](https://i.imgur.com/AUNiPU6.png)
 
 ## Description
 
-> *"Cookie Monster has hidden his top-secret cookie recipe somewhere on his website. As an aspiring cookie detective, your mission is to uncover this delectable secret. Can you outsmart Cookie Monster and find the hidden recipe? Additional details will be available after launching your challenge instance."*
-> *(O Monstro dos biscoito escondeu sua receita secreta de biscoito em algum lugar de seu website. Como um aspirante a detetive de biscoito, sua missão é desvendar este delicioso segredo. Você consegue ser mais esperto que o Monstro dos biscoitos e encontrar a receita escondida? Detalhes adicionais estarão disponíveis após o lançamento da sua instância do desafio.)*
+> *"Can you get the real meaning from this file."*
+> *(Você consegue entender o significado real deste arquivo?.)*
 
-#### Além da descrição, há três dicas
-## Dicas (Hints)
+#### O desafio fornece uma única dica
+## Dica (Hint)
 
-**Dica 1**
-> *"Sometimes, the most important information is hidden in plain sight. Have you checked all parts of the webpage?"*
-> *(Às vezes, a informação mais importante está escondida à vista de todos. Você já verificou todas as partes da página?)*
+**Dica**
+> *"Engaging in various decoding processes is of utmost importance"*
+> *(O envolvimento em vários processos de decodificação é de extrema importância)*
 
----
-
-**Dica 2**
-> *"Cookies aren't just for eating - they're also used in web technologies!"*
-> *(Cookies não são apenas para comer - eles também são usados em tecnologias web!)*
-
----
-
-**Dica 3**
-> *"Web browsers often have tools that can help you inspect various aspects of a webpage, including things you can't see directly."*
-> *(Navegadores web frequentemente possuem ferramentas que podem te ajudar a inspecionar vários aspectos de uma página, incluindo coisas que você não consegue ver diretamente.)*
 
 #### Interpretando as dicas
-As dicas fornecidas conduzem o desafiante em explorar os cookies utilizados no site, através da ferramenta de desenvolvedor no navegador para capturar a flag. 
+Com essa dica em mãos, já se sabe que decodificar uma só vez a mensagem não será suficiente para obter a flag. 
 
 #### Solução
-Ao iniciar a instância do desafio, é aberto uma página web inicial do "Cookie Monster's Secret Recipe" exigindo um usuário e senha para o login.
+Ao fazer o download do arquivo base do desafio. nos deparamos com a seguinte mensagem: `YidkM0JxZGtwQlRYdHFhR3g2YUhsZmF6TnFlVGwzWVROclgyeG9OakJzTURCcGZRPT0nCg==`. Utilizando a ferramenta "Cipher Identifier" do site [dcode](https://www.dcode.fr/cipher-identifier) para identificar qual o tipo de codificação, está presente no arquivo, ele retorna que o encoding utilizado mais provável é o [base64](https://www.redhat.com/en/blog/base64-encoding)
+![print do resultado encoding](https://i.imgur.com/MdsYWK8.png)
 
-![print do site](https://i.imgur.com/KkvLBM7.png)
+O mesmo site, fornece uma [ferramenta de decodificação de codificação base64](https://www.dcode.fr/base-64-encoding) e ao submeter a mensagem do arquivo, obtém-se a seguinte mensagem: `b'd3BqdkpBTXtqaGx6aHlfazNqeTl3YTNrX2xoNjBsMDBpfQ=='`. Podemos ver claramente que a mensagem ainda se encontra codificada. Diante dessa nova mensagem codificada, quando eu estava desenvolvendo o desafio, tive problemas ao prosseguir, uma vez que ao submetê-la no "Cipher Identifier" novamente, ele me retornou resultados com pouca precisão. Foi nesse momento que a ajuda do instrutor Vinícius foi muito importante para o prosseguimento do desafio. Ele me aconselhou a pegar somente o conteúdo da mensagem encriptada entre as aspas: `d3BqdkpBTXtqaGx6aHlfazNqeTl3YTNrX2xoNjBsMDBpfQ==` e me informou que mensagens terminadas com dois sinais de igualdade, indicam um forte indício que o código em questão se trata de uma codificação base64. Com esses direcionamentos, submeti mais uma vez o código, agora somente com o conteúdo entre as aspas, no decodificador de base64. Como resultado, tive a seguinte mensagem: `wpjvJAM{jhlzhy_k3jy9wa3k_lh60l00i}`. Nota-se mais uma vez que a mensagem ainda não está em texto legível, porém, pela primeira vez fica clara a aparição das chaves presentes na mensagem. Chaves essas que são uma espécie de máscara para as flags do picoCTF. Com essa nova informação em mãos fui ao site [site112](https://site112.com/cifra-de-cesar-codificar-descodificar) para tentar decodificar utilizando a [Cifra de César](https://www.splunk.com/en_us/blog/learn/caesar-cipher.html). Escolhi esse caminho pois além de constar no enunciado do desafio a Cifra de César, eu já tinha conhecimento que nesse tipo de codificação, a mensagem original, sofre um deslocamento de posições à direita e que o segredo para descobrir a mensagem, é justamente identificar qual foi o deslocamento utilizado. No site, realizei alguns testes das possíveis posições, partindo do deslocamento 1 à direita. Foi quando cheguei no deslocamento 7, que encontrei a flag do desafio.
 
-Ao inserir qualquer nome de usuário e senha nos campos e clicar em login, aparece a seguinte mensagem:
-> **Acesso Negado (Access Denied)**
->
-> *"Cookie Monster says: 'Me no need password. Me just need cookies!'"*
-> *(O Monstro das Bolachas diz: 'Eu não preciso de senha. Eu só preciso de cookies!')*
->
-> *"Hint: Have you checked your cookies lately?"*
-> *(Dica: Você verificou seus cookies ultimamente?)*
-> 
-Seguindo as dicas para encontrar o cookie, é necessário abri a interface de desenvolvimento com o comando: **Ctrl + Shift + I** e selecionar a aba "Application". No campo de "storage", aparecerá o elemento cookies, como mostra o seguint print:
-![print do cookie](https://i.imgur.com/MpzUkre.png)
-
-No campo "Value" dentro do cookies, é possível encontrar a seguinte mensagem encriptada: `"cGljb0NURntjMDBrMWVfbTBuc3Rlcl9sMHZlc19jMDBraWVzX0E2RkEwN0Q4fQ%3D%3D"`. Através da plataforma [CyberChef](https://gchq.github.io/CyberChef/), partindo o encondig [base64](https://www.redhat.com/en/blog/base64-encoding), ao colocar a sequência encriptada no Input da ferramenta, no Output, podemos ver em texto claro, a flag que estamos procurando:
-![print da flag](https://i.imgur.com/pLZrvgz.png)
-
+![Print da flag](https://i.imgur.com/VvOhGH1.png)
 
 #### Conclusão
-
 Flag:
->`picoCTF{c00k1e_m0nster_l0ves_c00kies_A6FA07D8}`
+>`picoCTF{caesar_d3cr9pt3d_ea60e00b}`
 >
->Esse foi um excelente desafio introdutório de CTF, uma vez que, explora conceitos de cookies de sessão de navegador e ao mesmo tempo exige que o desafiante descubra qual enconding foi utilizado para codificar a mensagem encontrada. Até encontrar a flag, foi explorados diversos conceitos que certamente serão fundamentais para a resolução de novos desafios.
+>Esse desafio foi excelente para conhecer e entender melhor os tipos de criptografia e as ferramentas de decodificação utilizadas. Uma vez conhecidos esses métodos, nos próximos CTF's certamente terei um melhor direcionamento para a descoberta das novas flags.
+
+
