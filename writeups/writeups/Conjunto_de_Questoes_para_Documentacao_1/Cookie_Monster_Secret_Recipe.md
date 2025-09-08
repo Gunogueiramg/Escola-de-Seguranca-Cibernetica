@@ -37,7 +37,7 @@ Este é um desafio da plataforma [picoCTF](https://picoctf.org/). Classificado c
 As dicas fornecidas conduzem o desafiante em explorar os cookies utilizados no site, através da ferramenta de desenvolvedor no navegador para capturar a flag. 
 
 #### Solução
-Ao iniciar a instância do desafio, é aberto uma página web inicial do "Cookie Monster's Secret Recipe" exigindo um usuário e senha para o login.
+Ao iniciar a instância do desafio, é aberta uma página web inicial do "Cookie Monster's Secret Recipe" exigindo um usuário e senha para o login.
 
 ![print do site](https://i.imgur.com/KkvLBM7.png)
 
