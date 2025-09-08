@@ -1,10 +1,12 @@
-# picoCTF - Cookie Monster Secret Recipe
+# picoCTF - Flag Hunters
 ###### Solved by @Gunogueiramg
 
-## Desafio: Cookie Monster Secret Recipe
+## Desafio: Flag Hunters
 #### Introdução
 
-Este é um desafio da plataforma [picoCTF](https://picoctf.org/). Classificado como nível fácil, ele é de simples resolução para iniciantes no mundo de CTF's. Esse exercício, incentiva o desafiante em utilizar a [ferramenta de desenvolvedor](https://developer.mozilla.org/pt-BR/docs/Learn_web_development/Howto/Tools_and_setup/What_are_browser_developer_tools) do navegador para capturar a flag e assim concluir a tarefa. O desafio explora conceitos de [cookies de navegador](https://pingback.com/br/resources/o-que-sao-cookies/) e  com isso, há um trocadilho com uma história de um monstro que guarda uma receita secreta de um **cookie** que também pode ser traduzido como **biscoito** para o português.
+Este desafio da plataforma [picoCTF](https://picoctf.org/) é bem completo e envolve uma análise cuidadosa de código para a capturara da flag. Para a resolução desse exercício, é necessário compreender o que são injeções em códigos e como elas podem ser um vetor de ataque importante.
+
+explo Classificado como nível fácil, ele é de simples resolução para iniciantes no mundo de CTF's. Esse exercício, incentiva o desafiante em utilizar a [ferramenta de desenvolvedor](https://developer.mozilla.org/pt-BR/docs/Learn_web_development/Howto/Tools_and_setup/What_are_browser_developer_tools) do navegador para capturar a flag e assim concluir a tarefa. O desafio explora conceitos de [cookies de navegador](https://pingback.com/br/resources/o-que-sao-cookies/) e  com isso, há um trocadilho com uma história de um monstro que guarda uma receita secreta de um **cookie** que também pode ser traduzido como **biscoito** para o português.
 
 #### Print do desafio
 ![Print do desafio](https://i.imgur.com/uLX2Qft.png)
